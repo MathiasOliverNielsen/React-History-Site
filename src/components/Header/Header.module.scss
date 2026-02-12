@@ -1,0 +1,195 @@
+@import "../../styles/variables";
+
+.header {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.heroImage {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    height: 666px;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(41, 40, 40, 0.21);
+}
+
+.card {
+  position: absolute;
+  top: 290px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1154px, calc(100% - 2rem));
+  padding: 80px 2rem;
+  background: var(--bg-card);
+  border: 24px solid var(--border-color);
+  box-shadow: 0 -9px 19.7px 7px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+
+  @media (max-width: $breakpoint-tablet) {
+    width: calc(100% - 2rem);
+    padding: 45px 1.5rem;
+    border-width: 20px;
+    top: 109px;
+  }
+}
+
+.cornerDot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+
+  // Top-left corner dot - inside the card
+  &[data-position="top-left"] {
+    width: 30px;
+    height: 30px;
+    top: 18px;
+    left: 50px;
+  }
+
+  // Top-right corner dot - inside the card
+  &[data-position="top-right"] {
+    width: 30px;
+    height: 30px;
+    top: 18px;
+    right: 50px;
+  }
+
+  // Bottom-left corner dot - inside the card
+  &[data-position="bottom-left"] {
+    width: 30px;
+    height: 30px;
+    bottom: 18px;
+    left: 50px;
+  }
+
+  // Bottom-right corner dot - inside the card
+  &[data-position="bottom-right"] {
+    width: 30px;
+    height: 30px;
+    bottom: 18px;
+    right: 50px;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    &[data-position="top-left"] {
+      width: 28px;
+      height: 27px;
+      top: 15px;
+      left: 30px;
+    }
+
+    &[data-position="top-right"] {
+      width: 32px;
+      height: 30px;
+      top: 12px;
+      right: 25px;
+    }
+
+    &[data-position="bottom-left"] {
+      width: 28px;
+      height: 27px;
+      bottom: 15px;
+      left: 30px;
+    }
+
+    &[data-position="bottom-right"] {
+      width: 32px;
+      height: 30px;
+      bottom: 12px;
+      right: 25px;
+    }
+  }
+}
+
+.title {
+  font-family: "Limelight", serif;
+  font-size: clamp(3rem, 6.67vw, 6rem);
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 4rem;
+  }
+}
+
+.subtitle {
+  font-family: "Linden Hill", serif;
+  font-size: clamp(1.25rem, 2.22vw, 2rem);
+  text-align: center;
+  color: var(--text-secondary);
+  max-width: 583px;
+  margin: 0 auto;
+  line-height: 1.4;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 1.25rem;
+    max-width: 335px;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6rem;
+  margin-top: -50px;
+  position: relative;
+  z-index: 20;
+
+  a {
+    font-family: "Linden Hill", serif;
+    font-size: 2.25rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all $transition-fast;
+    position: relative;
+
+    &:hover {
+      color: var(--accent-highlight);
+    }
+
+    &.active {
+      color: var(--accent-highlight);
+      text-decoration: underline;
+      text-underline-offset: 8px;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column-reverse;
+    gap: 1rem;
+    margin-top: -20px;
+
+    a {
+      font-size: 2.25rem;
+    }
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 24px;
+  background: var(--bg-secondary);
+  margin-top: 2rem;
+}

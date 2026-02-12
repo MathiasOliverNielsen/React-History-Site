@@ -1,10 +1,11 @@
-import { Header } from "./components/Header";
+import { TodayPage } from "./pages/TodayPage";
+import { PageLayout } from "./layouts/PageLayout";
 
 function App() {
   return (
-    <>
-      <Header />
-    </>
+    <PageLayout>
+      <TodayPage />
+    </PageLayout>
   );
 }
 

@@ -1,0 +1,89 @@
+// Example SCSS file showing how to use the theme system
+@import "../theme/theme";
+
+// Component Styles
+.timeline-item {
+  background: var(--bg-primary);
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  margin-bottom: $space-md;
+  box-shadow: var(--shadow-md);
+
+  // Using SCSS nesting
+  .timeline-title {
+    font-family: $font-display;
+    font-size: $text-2xl;
+    color: var(--text-primary);
+    margin-bottom: $space-sm;
+
+    @include respond-to(md) {
+      font-size: $text-3xl;
+    }
+  }
+
+  .timeline-content {
+    font-family: $font-body;
+    color: var(--text-secondary);
+    line-height: 1.6;
+
+    p {
+      margin-bottom: $space-sm;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .timeline-date {
+    font-size: $text-sm;
+    color: var(--accent-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  // Hover effects
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+  }
+}
+
+// Button component using mixin
+.primary-button {
+  @include button-base;
+
+  background: var(--accent-primary);
+  color: var(--text-light);
+  padding: $space-sm $space-lg;
+  font-size: $text-base;
+
+  @include respond-to(md) {
+    padding: $space-md $space-xl;
+    font-size: $text-lg;
+  }
+
+  &:hover {
+    background: darken($color-gold, 10%);
+  }
+}
+
+// Input component using mixin
+.form-input {
+  @include input-base;
+
+  padding: $space-sm;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  &::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: var(--accent-primary);
+  }
+}

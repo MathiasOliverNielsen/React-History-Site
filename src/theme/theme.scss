@@ -1,0 +1,160 @@
+// Import Google Fonts
+@import url("https://fonts.googleapis.com/css2?family=Limelight&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Linden+Hill:ital,wght@0,400;1,400&display=swap");
+
+// SCSS Variables
+$font-display: "Limelight", serif;
+$font-body: "Linden Hill", serif;
+
+// Color Palette
+$color-cream: #ffe89f;
+$color-gold: #d29f62;
+$color-brown: #695e48;
+$color-sage: #c7bd8d;
+$color-dark: #1f1f1f;
+$color-black: #151515;
+$color-light: #f5f5f5;
+
+// Typography Scale
+$text-xs: 0.75rem;
+$text-sm: 0.875rem;
+$text-base: 1rem;
+$text-lg: 1.125rem;
+$text-xl: 1.25rem;
+$text-2xl: 1.5rem;
+$text-3xl: 1.875rem;
+$text-4xl: 2.25rem;
+$text-5xl: 3rem;
+
+// Spacing System
+$space-xs: 0.5rem;
+$space-sm: 1rem;
+$space-md: 1.5rem;
+$space-lg: 2rem;
+$space-xl: 3rem;
+$space-2xl: 4rem;
+
+// Border Radius
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+
+// Breakpoints
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+}
+
+@mixin button-base {
+  font-family: $font-body;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin input-base {
+  font-family: $font-body;
+  border: 2px solid $color-light;
+  border-radius: $radius-md;
+  font-size: $text-base;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color-light, 0.3);
+  }
+}
+
+// CSS Custom Properties for runtime theming
+:root {
+  // Fonts
+  --font-display: #{$font-display};
+  --font-body: #{$font-body};
+
+  // Colors
+  --color-cream: #{$color-cream};
+  --color-gold: #{$color-gold};
+  --color-brown: #{$color-brown};
+  --color-sage: #{$color-sage};
+  --color-dark: #{$color-dark};
+  --color-black: #{$color-black};
+  --color-light: #{$color-light};
+
+  // Theme Colors (semantic names)
+  --bg-primary: var(--color-light);
+  --bg-secondary: var(--color-cream);
+  --bg-dark: var(--color-dark);
+  --text-primary: var(--color-dark);
+  --text-secondary: var(--color-brown);
+  --text-light: var(--color-light);
+  --accent-primary: var(--color-gold);
+  --accent-secondary: var(--color-sage);
+  --border-color: var(--color-brown);
+
+  // Typography Scale
+  --text-xs: #{$text-xs};
+  --text-sm: #{$text-sm};
+  --text-base: #{$text-base};
+  --text-lg: #{$text-lg};
+  --text-xl: #{$text-xl};
+  --text-2xl: #{$text-2xl};
+  --text-3xl: #{$text-3xl};
+  --text-4xl: #{$text-4xl};
+  --text-5xl: #{$text-5xl};
+
+  // Spacing
+  --space-xs: #{$space-xs};
+  --space-sm: #{$space-sm};
+  --space-md: #{$space-md};
+  --space-lg: #{$space-lg};
+  --space-xl: #{$space-xl};
+  --space-2xl: #{$space-2xl};
+
+  // Border Radius
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+
+  // Shadows
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

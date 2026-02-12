@@ -11,6 +11,8 @@ const LayoutContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
 `;
 
 const Main = styled.main`
