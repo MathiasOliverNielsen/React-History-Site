@@ -1,0 +1,155 @@
+@import '../../styles/variables';
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6rem;
+  min-height: 80px;
+  
+  @media (max-width: $breakpoint-tablet) {
+    margin-bottom: 4rem;
+  }
+}
+
+// Spine dot container - always in center, dot sits on spine
+.spine {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  
+  @media (max-width: $breakpoint-tablet) {
+    left: 20px;
+    transform: translate(0, -50%);
+  }
+}
+
+.dot {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+// LEFT side: line comes from right, content on far left
+.left {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  
+  .content {
+    margin-right: calc(50% + 50px);
+    
+    @media (max-width: $breakpoint-tablet) {
+      margin-right: 0;
+      margin-left: 80px;
+    }
+  }
+  
+  .textBlock {
+    text-align: right;
+    max-width: 455px;
+    
+    @media (max-width: $breakpoint-tablet) {
+      text-align: right;
+    }
+  }
+  
+  .line {
+    width: 181px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 $spacing-md 0 0;
+    
+    @media (max-width: $breakpoint-tablet) {
+      display: none;
+    }
+  }
+}
+
+// RIGHT side: line comes from left, content on far right
+.right {
+  flex-direction: row;
+  justify-content: flex-start;
+  
+  .content {
+    margin-left: calc(50% + 50px);
+    
+    @media (max-width: $breakpoint-tablet) {
+      margin-left: 80px;
+    }
+  }
+  
+  .textBlock {
+    text-align: left;
+    max-width: 455px;
+    
+    @media (max-width: $breakpoint-tablet) {
+      text-align: right;
+    }
+  }
+  
+  .line {
+    width: 181px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 0 0 $spacing-md;
+    
+    @media (max-width: $breakpoint-tablet) {
+      display: none;
+    }
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; // Tighter spacing for fluent text
+}
+
+.year {
+  font-family: 'Linden Hill', serif;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.text {
+  font-family: 'Linden Hill', serif;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+}
+
+.readMore {
+  font-family: 'Linden Hill', serif;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+  width: fit-content;
+  margin-top: 0.25rem;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}

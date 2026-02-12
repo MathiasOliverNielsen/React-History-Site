@@ -1,67 +1,37 @@
-// Import theme variables
-@import "../theme/theme";
-
-// Global Styles using Design System
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+@import './variables';
+@import './reset';
+@import './typography';
 
 body {
-  font-family: var(--font-body);
-  line-height: 1.6;
+  background-color: var(--bg-primary);
   color: var(--text-primary);
-  background: var(--bg-primary);
-  font-size: var(--text-base);
-
-  // Responsive typography using SCSS mixins
-  @include respond-to(md) {
-    font-size: var(--text-lg);
-  }
-
-  @include respond-to(lg) {
-    font-size: var(--text-xl);
-  }
+  transition: background-color $transition-medium, color $transition-medium;
+  overflow-x: hidden;
 }
 
-// Typography with nesting
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display);
-  line-height: 1.2;
-  margin-bottom: var(--space-sm);
+#root {
+  min-height: 100vh;
+}
 
-  // Nested responsive styling
-  @include respond-to(md) {
-    margin-bottom: var(--space-md);
+// Utility classes (minimal)
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 0 $spacing-md;
   }
 }
 
-p {
-  margin-bottom: var(--space-sm);
-}
-
-// Focus styles for accessibility
-*:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
-
-// Remove focus outline for mouse users but keep for keyboard users
-body:not(.user-is-tabbing) {
-  button:focus,
-  input:focus,
-  select:focus,
-  textarea:focus {
-    outline: none;
-  }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

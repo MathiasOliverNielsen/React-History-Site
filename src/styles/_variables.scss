@@ -1,0 +1,63 @@
+// Color Palette
+$color-primary: #C7BD8D;
+$color-accent: #FFE9BF;
+$color-gold: #D29E62;
+$color-brown: #695E48;
+$color-dark: #1F1F1F;
+$color-darker: #151515;
+$color-light: #F5F5F5;
+$color-white: #FFFFFF;
+
+// Theme colors
+:root {
+  --bg-primary: #{$color-darker};
+  --bg-secondary: #{$color-dark};
+  --bg-card: #{$color-dark};
+  --text-primary: #{$color-white};
+  --text-secondary: #{$color-primary};
+  --accent: #{$color-primary};
+  --accent-highlight: #{$color-accent};
+  --border-color: #{$color-primary};
+  --decorative: #{$color-brown};
+}
+
+[data-theme="light"] {
+  --bg-primary: #{$color-light};
+  --bg-secondary: #{$color-brown};
+  --bg-card: #{$color-white};
+  --text-primary: #{$color-dark};
+  --text-secondary: #{$color-brown};
+  --accent: #{$color-primary};
+  --accent-highlight: #{$color-accent};
+  --border-color: #{$color-dark};
+  --decorative: #FFE9BF;
+}
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+$spacing-2xl: 4rem;
+$spacing-3xl: 6rem;
+
+// Container
+$max-width: 1440px;
+$container-padding: 2rem;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 852px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;
+
+// Z-index
+$z-header: 100;
+$z-theme-toggle: 200;
+$z-back-to-top: 300;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-medium: 0.3s ease;
+$transition-slow: 0.5s ease;

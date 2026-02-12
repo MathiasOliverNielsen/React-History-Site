@@ -1,0 +1,35 @@
+@import '../../styles/variables';
+
+.toggle {
+  position: fixed;
+  right: 2rem;
+  top: 8rem;
+  z-index: $z-theme-toggle;
+  width: 73px;
+  height: 73px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform $transition-fast, opacity $transition-fast;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  @media (max-width: $breakpoint-tablet) {
+    width: 42px;
+    height: 42px;
+    right: 1rem;
+    top: 6rem;
+  }
+}

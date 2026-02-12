@@ -1,0 +1,77 @@
+@import '../../styles/variables';
+
+.timeline {
+  position: relative;
+  padding: 4rem 0;
+  
+  @media (max-width: $breakpoint-tablet) {
+    padding: 2rem 0;
+  }
+}
+
+.spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 150px;
+  width: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  z-index: 0;
+  
+  @media (max-width: $breakpoint-tablet) {
+    left: 20px;
+    transform: none;
+  }
+}
+
+.spineTop {
+  position: absolute;
+  left: 50%;
+  top: -31px;
+  transform: translateX(-50%);
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--accent);
+  z-index: 1;
+  
+  @media (max-width: $breakpoint-tablet) {
+    left: 20px;
+    transform: none;
+    width: 50px;
+    height: 50px;
+    top: -25px;
+  }
+}
+
+.items {
+  position: relative;
+  z-index: 2;
+  margin-top: 8rem;
+  
+  @media (max-width: $breakpoint-tablet) {
+    margin-top: 6rem;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.scrollText {
+  font-family: 'Linden Hill', serif;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.arrow {
+  width: 2px;
+  height: 63px;
+}

@@ -1,4 +1,4 @@
-import { ApiResponse, TimelineEvent } from "./types";
+import type { ApiResponse, TimelineEvent } from "./types";
 
 const API_BASE_URL = "https://history.muffinlabs.com/date";
 

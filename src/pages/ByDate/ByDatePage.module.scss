@@ -1,0 +1,76 @@
+@import '../../styles/variables';
+
+.headerCustom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  margin-top: -1rem;
+}
+
+.mainTitle {
+  font-family: 'Limelight', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--accent);
+  text-align: center;
+  margin: 0;
+  
+  .highlight {
+    color: var(--accent-highlight);
+    text-decoration: underline;
+  }
+}
+
+.description {
+  font-family: 'Linden Hill', serif;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.input {
+  padding: $spacing-sm $spacing-md;
+  font-family: 'Linden Hill', serif;
+  font-size: 1.5rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+  
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: var(--accent-highlight);
+  }
+}
+
+.loading,
+.error,
+.noEvents {
+  text-align: center;
+  font-family: 'Linden Hill', serif;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  padding: 4rem 2rem;
+}
+
+.error {
+  color: #ff6b6b;
+}
