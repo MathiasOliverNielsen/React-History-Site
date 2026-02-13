@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { PageLayout } from "../../layouts/PageLayout";
 import { TimelineLayout } from "../../layouts/TimelineLayout";
 import { TimelineItem } from "../../components/TimelineItem";
-import { fetchByDate } from "../../api/history";
+import { fetchMultipleDaysAllHistory } from "../../api/history";
 import type { TimelineEvent } from "../../api/types";
+import { getTimelineSides } from "../../api/timeline-utils";
+import { subscribeDateChange } from "../../components/Header/Header";
 import styles from "./ByDatePage.module.scss";
 
 export function ByDatePage() {
@@ -18,47 +20,68 @@ export function ByDatePage() {
     try {
       setLoading(true);
       setError(null);
-      const data = await fetchByDate(date);
+
+      const data = await fetchMultipleDaysAllHistory(date);
+
+      if (data.length === 0) {
+        const endDate = new Date(date);
+        endDate.setDate(date.getDate() + 2);
+        setError(`No historical events found for ${date.toLocaleDateString()} through ${endDate.toLocaleDateString()}. This period may not have any recorded historical events.`);
+      }
+
       setEvents(data);
-      setDisplayedEvents(data.slice(0, 10));
       setLoadMore(10);
     } catch (err) {
       setError("Failed to load events. Please try again later.");
       console.error(err);
       setEvents([]);
-      setDisplayedEvents([]);
+      setLoadMore(10);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const dateValue = e.target.value;
-    setSelectedDate(dateValue);
+  // Subscribe to date changes from Header
+  useEffect(() => {
+    const unsubscribe = subscribeDateChange((dateValue: string) => {
+      setSelectedDate(dateValue);
 
-    if (dateValue) {
-      const date = new Date(dateValue);
-      loadEvents(date);
-    } else {
-      setEvents([]);
-      setDisplayedEvents([]);
-    }
-  };
+      if (dateValue) {
+        const date = new Date(dateValue);
+        loadEvents(date);
+      } else {
+        setEvents([]);
+        setDisplayedEvents([]);
+        setError(null);
+        setLoading(false);
+      }
+    });
+
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100 && displayedEvents.length < events.length) {
+      const { scrollY, innerHeight } = window;
+      const { scrollHeight } = document.documentElement;
+      const isNearBottom = scrollY + innerHeight >= scrollHeight - 200;
+      const hasMoreEvents = displayedEvents.length < events.length;
+
+      if (isNearBottom && hasMoreEvents && !loading) {
         setLoadMore((prev) => prev + 10);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [displayedEvents.length, events.length]);
+  }, [displayedEvents.length, events.length, loading]);
 
   useEffect(() => {
     if (events.length > 0) {
-      setDisplayedEvents(events.slice(0, loadMore));
+      const newDisplayedEvents = events.slice(0, loadMore);
+      setDisplayedEvents(newDisplayedEvents);
+    } else {
+      setDisplayedEvents([]);
     }
   }, [loadMore, events]);
 
@@ -72,36 +95,37 @@ export function ByDatePage() {
 
   return (
     <PageLayout>
-      <div className={styles.headerCustom}>
-        <h1 className={styles.mainTitle}>
-          {selectedDate ? (
-            <>
-              <span>ON: </span>
-              <span className={styles.highlight}>{formatDateForDisplay(selectedDate)}</span>
-            </>
-          ) : (
-            "SELECT A DATE"
-          )}
-        </h1>
-        {selectedDate && <p className={styles.description}>What happened on this day - Here you can enter a specific date to get only events that happened on this date</p>}
-      </div>
-
-      <div className={styles.controls}>
-        <input id="date-picker" type="date" value={selectedDate} onChange={handleDateChange} className={styles.input} aria-label="Select date" />
-      </div>
-
       {loading && <div className={styles.loading}>Loading events...</div>}
       {error && <div className={styles.error}>{error}</div>}
 
       {!loading && !error && displayedEvents.length > 0 && (
-        <TimelineLayout>
-          {displayedEvents.map((event, index) => (
-            <TimelineItem key={`${event.year}-${index}`} event={event} side={index % 2 === 0 ? "right" : "left"} />
-          ))}
-        </TimelineLayout>
+        <>
+          <TimelineLayout>
+            {(() => {
+              // Get timeline sides - easily change pattern here
+              const timelineSides = getTimelineSides(displayedEvents, {
+                pattern: "default", // Normal alternating pattern
+                startSide: "left", // Start with left side
+              });
+
+              return displayedEvents.map((event, index) => <TimelineItem key={`${event.year}-${index}`} event={event} side={timelineSides[index]} />);
+            })()}
+          </TimelineLayout>
+
+          {/* Show "scroll for more" indicator when there are more events */}
+          {displayedEvents.length < events.length && (
+            <div className={styles.loadMoreIndicator}>
+              Scroll down to load more events ({displayedEvents.length} of {events.length} shown)
+            </div>
+          )}
+        </>
       )}
 
-      {!loading && !error && displayedEvents.length === 0 && selectedDate && <div className={styles.noEvents}>No events found for this date.</div>}
+      {!loading && !error && !selectedDate && <div className={styles.noEvents}>Please select a date above to view historical events.</div>}
+
+      {!loading && !error && displayedEvents.length === 0 && selectedDate && (
+        <div className={styles.noEvents}>No historical events found for {formatDateForDisplay(selectedDate)}. Try selecting a different date.</div>
+      )}
     </PageLayout>
   );
 }

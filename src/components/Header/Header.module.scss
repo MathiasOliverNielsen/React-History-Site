@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .header {
   position: relative;
@@ -10,14 +10,14 @@
   width: 100%;
   height: 800px;
   overflow: hidden;
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
-  
+
   @media (max-width: $breakpoint-tablet) {
     height: 666px;
   }
@@ -43,7 +43,7 @@
   border: 24px solid var(--border-color);
   box-shadow: 0 -9px 19.7px 7px rgba(0, 0, 0, 0.25);
   z-index: 10;
-  
+
   @media (max-width: $breakpoint-tablet) {
     width: calc(100% - 2rem);
     padding: 45px 1.5rem;
@@ -56,7 +56,7 @@
   position: absolute;
   border-radius: 50%;
   background: var(--accent);
-  
+
   // Top-left corner dot - inside the card
   &[data-position="top-left"] {
     width: 30px;
@@ -64,7 +64,7 @@
     top: 18px;
     left: 50px;
   }
-  
+
   // Top-right corner dot - inside the card
   &[data-position="top-right"] {
     width: 30px;
@@ -72,7 +72,7 @@
     top: 18px;
     right: 50px;
   }
-  
+
   // Bottom-left corner dot - inside the card
   &[data-position="bottom-left"] {
     width: 30px;
@@ -80,7 +80,7 @@
     bottom: 18px;
     left: 50px;
   }
-  
+
   // Bottom-right corner dot - inside the card
   &[data-position="bottom-right"] {
     width: 30px;
@@ -88,7 +88,7 @@
     bottom: 18px;
     right: 50px;
   }
-  
+
   @media (max-width: $breakpoint-tablet) {
     &[data-position="top-left"] {
       width: 28px;
@@ -96,21 +96,21 @@
       top: 15px;
       left: 30px;
     }
-    
+
     &[data-position="top-right"] {
       width: 32px;
       height: 30px;
       top: 12px;
       right: 25px;
     }
-    
+
     &[data-position="bottom-left"] {
       width: 28px;
       height: 27px;
       bottom: 15px;
       left: 30px;
     }
-    
+
     &[data-position="bottom-right"] {
       width: 32px;
       height: 30px;
@@ -121,26 +121,75 @@
 }
 
 .title {
-  font-family: 'Limelight', serif;
+  font-family: "Limelight", serif;
   font-size: clamp(3rem, 6.67vw, 6rem);
   text-align: center;
   color: var(--text-secondary);
   margin-bottom: 1rem;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .highlight {
+    color: var(--accent);
+  }
+
   @media (max-width: $breakpoint-tablet) {
     font-size: 4rem;
+    gap: 0.5rem;
+  }
+}
+
+.inlineDateInput {
+  font-family: "Limelight", serif;
+  font-size: clamp(3rem, 6.67vw, 6rem);
+  background: transparent;
+  color: var(--accent);
+  border: none;
+  border-bottom: 3px solid var(--accent);
+  text-align: center;
+  cursor: pointer;
+  min-width: 200px;
+  padding: 0 0.5rem;
+
+  &::-webkit-calendar-picker-indicator {
+    filter: brightness(0) saturate(100%) invert(69%) sepia(25%) saturate(466%) hue-rotate(32deg) brightness(95%) contrast(89%);
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: var(--accent-highlight);
+  }
+
+  &::placeholder {
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 4rem;
+    min-width: 180px;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 2.5rem;
+    min-width: 150px;
   }
 }
 
 .subtitle {
-  font-family: 'Linden Hill', serif;
+  font-family: "Linden Hill", serif;
   font-size: clamp(1.25rem, 2.22vw, 2rem);
   text-align: center;
   color: var(--text-secondary);
   max-width: 583px;
   margin: 0 auto;
   line-height: 1.4;
-  
+
   @media (max-width: $breakpoint-tablet) {
     font-size: 1.25rem;
     max-width: 335px;
@@ -155,19 +204,19 @@
   margin-top: -50px;
   position: relative;
   z-index: 20;
-  
+
   a {
-    font-family: 'Linden Hill', serif;
+    font-family: "Linden Hill", serif;
     font-size: 2.25rem;
     color: var(--text-secondary);
     text-decoration: none;
     transition: all $transition-fast;
     position: relative;
-    
+
     &:hover {
       color: var(--accent-highlight);
     }
-    
+
     &.active {
       color: var(--accent-highlight);
       text-decoration: underline;
@@ -175,12 +224,12 @@
       text-decoration-thickness: 2px;
     }
   }
-  
+
   @media (max-width: $breakpoint-tablet) {
     flex-direction: column-reverse;
     gap: 1rem;
     margin-top: -20px;
-    
+
     a {
       font-size: 2.25rem;
     }

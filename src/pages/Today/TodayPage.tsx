@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { PageLayout } from "../../layouts/PageLayout";
 import { TimelineLayout } from "../../layouts/TimelineLayout";
 import { TimelineItem } from "../../components/TimelineItem";
-import { fetchByDate } from "../../api/history";
+import { fetchAllHistoryForDate } from "../../api/history";
 import type { TimelineEvent } from "../../api/types";
+import { getTimelineSides } from "../../api/timeline-utils";
 import styles from "./TodayPage.module.scss";
 
 export function TodayPage() {
@@ -13,14 +14,42 @@ export function TodayPage() {
   const [error, setError] = useState<string | null>(null);
   const [loadMore, setLoadMore] = useState(10);
 
+  // Generate random dates throughout the year (use random historical years)
+  const generateRandomDates = (count: number = 5) => {
+    const dates = [];
+
+    for (let i = 0; i < count; i++) {
+      const randomMonth = Math.floor(Math.random() * 12) + 1;
+      const daysInMonth = new Date(2000, randomMonth, 0).getDate(); // Use 2000 as reference for days in month
+      const randomDay = Math.floor(Math.random() * daysInMonth) + 1;
+      dates.push(new Date(2000, randomMonth - 1, randomDay)); // Year doesn't matter for fetchAllHistoryForDate
+    }
+    return dates;
+  };
+
   useEffect(() => {
-    const loadEvents = async () => {
+    const loadRandomEvents = async () => {
       try {
         setLoading(true);
-        const today = new Date();
-        const data = await fetchByDate(today);
-        setEvents(data);
-        setDisplayedEvents(data.slice(0, 10));
+        const randomDates = generateRandomDates(5);
+        const allEvents: TimelineEvent[] = [];
+
+        // Fetch events from multiple random dates
+        for (const date of randomDates) {
+          try {
+            const data = await fetchAllHistoryForDate(date);
+            allEvents.push(...data);
+          } catch (dateError) {
+            console.warn(`Failed to fetch events for ${date}:`, dateError);
+          }
+        }
+
+        // Shuffle and deduplicate events
+        const uniqueEvents = allEvents.filter((event, index, arr) => arr.findIndex((e) => e.year === event.year && e.text === event.text) === index);
+
+        const shuffledEvents = uniqueEvents.sort(() => Math.random() - 0.5);
+        setEvents(shuffledEvents);
+        setDisplayedEvents(shuffledEvents.slice(0, 10));
       } catch (err) {
         setError("Failed to load events. Please try again later.");
         console.error(err);
@@ -29,7 +58,7 @@ export function TodayPage() {
       }
     };
 
-    loadEvents();
+    loadRandomEvents();
   }, []);
 
   useEffect(() => {
@@ -49,10 +78,17 @@ export function TodayPage() {
     }
   }, [loadMore, events]);
 
+  // Get timeline sides - you can easily change the pattern here
+  const timelineSides = getTimelineSides(displayedEvents, {
+    pattern: "default", // Normal alternating left-right pattern
+    startSide: "left", // Start with left side
+    // For custom pattern, add: customPattern: ['left', 'right', 'right', 'left']
+  });
+
   if (loading) {
     return (
       <PageLayout>
-        <div className={styles.loading}>Loading today's events...</div>
+        <div className={styles.loading}>Loading random historical events...</div>
       </PageLayout>
     );
   }
@@ -67,9 +103,14 @@ export function TodayPage() {
 
   return (
     <PageLayout>
+      <div className={styles.headerCustom}>
+        <h1 className={styles.mainTitle}>Random Historical Events</h1>
+        <p className={styles.description}>Discover fascinating events from random dates throughout history</p>
+      </div>
+
       <TimelineLayout>
         {displayedEvents.map((event, index) => (
-          <TimelineItem key={`${event.year}-${index}`} event={event} side={index % 2 === 0 ? "right" : "left"} />
+          <TimelineItem key={`${event.year}-${index}`} event={event} side={timelineSides[index]} />
         ))}
       </TimelineLayout>
     </PageLayout>

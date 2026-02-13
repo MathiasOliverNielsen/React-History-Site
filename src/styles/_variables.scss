@@ -1,21 +1,23 @@
 // Color Palette
-$color-primary: #C7BD8D;
-$color-accent: #FFE9BF;
-$color-gold: #D29E62;
-$color-brown: #695E48;
-$color-dark: #1F1F1F;
+$color-primary: #c7bd8d;
+$color-accent: #ffe9bf;
+$color-gold: #d29e62;
+$color-brown: #695e48;
+$color-dark: #1f1f1f;
 $color-darker: #151515;
-$color-light: #F5F5F5;
-$color-white: #FFFFFF;
+$color-light: #f5f5f5;
+$color-white: #ffffff;
 
 // Theme colors
 :root {
   --bg-primary: #{$color-darker};
   --bg-secondary: #{$color-dark};
   --bg-card: #{$color-dark};
+  --background: #{$color-darker};
   --text-primary: #{$color-white};
   --text-secondary: #{$color-primary};
   --accent: #{$color-primary};
+  --accent-rgb: 199, 189, 141; // RGB values for $color-primary
   --accent-highlight: #{$color-accent};
   --border-color: #{$color-primary};
   --decorative: #{$color-brown};
@@ -25,12 +27,14 @@ $color-white: #FFFFFF;
   --bg-primary: #{$color-light};
   --bg-secondary: #{$color-brown};
   --bg-card: #{$color-white};
+  --background: #{$color-light};
   --text-primary: #{$color-dark};
   --text-secondary: #{$color-brown};
   --accent: #{$color-primary};
+  --accent-rgb: 199, 189, 141; // RGB values for $color-primary
   --accent-highlight: #{$color-accent};
   --border-color: #{$color-dark};
-  --decorative: #FFE9BF;
+  --decorative: #ffe9bf;
 }
 
 // Spacing
@@ -58,6 +62,9 @@ $z-theme-toggle: 200;
 $z-back-to-top: 300;
 
 // Transitions
+$transition-fast: 0.2s ease-in-out;
+$transition-medium: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
 $transition-fast: 0.2s ease;
 $transition-medium: 0.3s ease;
 $transition-slow: 0.5s ease;

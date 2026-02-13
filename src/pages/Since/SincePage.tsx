@@ -4,6 +4,7 @@ import { TimelineLayout } from "../../layouts/TimelineLayout";
 import { TimelineItem } from "../../components/TimelineItem";
 import { fetchByDate } from "../../api/history";
 import type { TimelineEvent } from "../../api/types";
+import { getTimelineSides } from "../../api/timeline-utils";
 import styles from "./SincePage.module.scss";
 
 export function SincePage() {
@@ -18,14 +19,12 @@ export function SincePage() {
     try {
       setLoading(true);
       setError(null);
-      // Fetch events for today's specific date
+      // Fetch events for today's date in the specified year
       const today = new Date();
-      const allEvents = await fetchByDate(today);
+      const targetDate = new Date(year, today.getMonth(), today.getDate());
+      const yearEvents = await fetchByDate(targetDate);
 
-      // Filter to show ONLY events from the selected year on this specific day
-      const filteredEvents = allEvents.filter((event) => event.year === year);
-      setEvents(filteredEvents);
-      setDisplayedEvents(filteredEvents.slice(0, 10));
+      setEvents(yearEvents);
       setLoadMore(10);
     } catch (err) {
       setError("Failed to load events. Please try again later.");
@@ -102,9 +101,15 @@ export function SincePage() {
 
       {!loading && !error && displayedEvents.length > 0 && (
         <TimelineLayout>
-          {displayedEvents.map((event, index) => (
-            <TimelineItem key={`${event.year}-${index}`} event={event} side={index % 2 === 0 ? "right" : "left"} />
-          ))}
+          {(() => {
+            // Get timeline sides - you can customize this pattern
+            const timelineSides = getTimelineSides(displayedEvents, {
+              pattern: "default", // Try different patterns here
+              startSide: "left",
+            });
+
+            return displayedEvents.map((event, index) => <TimelineItem key={`${event.year}-${index}`} event={event} side={timelineSides[index]} />);
+          })()}
         </TimelineLayout>
       )}
 

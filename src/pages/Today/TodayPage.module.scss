@@ -1,9 +1,36 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
+
+.headerCustom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  margin-top: -1rem;
+}
+
+.mainTitle {
+  font-family: "Limelight", serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: var(--accent);
+  text-align: center;
+  margin: 0;
+}
+
+.description {
+  font-family: "Linden Hill", serif;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.4;
+  margin: 0;
+}
 
 .loading,
 .error {
   text-align: center;
-  font-family: 'Linden Hill', serif;
+  font-family: "Linden Hill", serif;
   font-size: 1.5rem;
   color: var(--text-primary);
   padding: 4rem 2rem;

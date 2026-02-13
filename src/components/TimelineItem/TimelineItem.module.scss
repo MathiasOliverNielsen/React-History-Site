@@ -1,101 +1,96 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .item {
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 6rem;
-  min-height: 80px;
-  
+  margin-bottom: 4rem;
+  min-height: 120px;
+  width: 100%;
+
   @media (max-width: $breakpoint-tablet) {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
+    min-height: 100px;
   }
 }
 
-// Spine dot container - always in center, dot sits on spine
+// Spine dot container - always centered on the spine
 .spine {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
-  
+  z-index: 3;
+
   @media (max-width: $breakpoint-tablet) {
-    left: 20px;
-    transform: translate(0, -50%);
+    left: 30px;
+    transform: translate(-50%, -50%);
   }
 }
 
 .dot {
-  width: 37px;
-  height: 37px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--accent);
+  border: 3px solid var(--background);
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
-// LEFT side: line comes from right, content on far left
+// Connection line between dot and content
+.line {
+  position: absolute;
+  height: 2px;
+  background: var(--accent);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
+
+// LEFT side positioning
 .left {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  
+  justify-content: flex-start;
+
   .content {
-    margin-right: calc(50% + 50px);
-    
-    @media (max-width: $breakpoint-tablet) {
-      margin-right: 0;
-      margin-left: 80px;
-    }
+    width: calc(50% - 80px);
+    margin-right: 80px;
+    text-align: left; // Changed to left for better readability
   }
-  
-  .textBlock {
-    text-align: right;
-    max-width: 455px;
-    
-    @media (max-width: $breakpoint-tablet) {
-      text-align: right;
-    }
-  }
-  
+
   .line {
-    width: 181px;
-    height: 2px;
-    background: var(--accent);
-    margin: 0 $spacing-md 0 0;
-    
+    right: calc(50% + 10px);
+    width: 60px;
+
     @media (max-width: $breakpoint-tablet) {
       display: none;
     }
   }
 }
 
-// RIGHT side: line comes from left, content on far right
+// RIGHT side positioning
 .right {
-  flex-direction: row;
-  justify-content: flex-start;
-  
+  justify-content: flex-end;
+
   .content {
-    margin-left: calc(50% + 50px);
-    
-    @media (max-width: $breakpoint-tablet) {
-      margin-left: 80px;
-    }
-  }
-  
-  .textBlock {
+    width: calc(50% - 80px);
+    margin-left: 80px;
     text-align: left;
-    max-width: 455px;
-    
+
     @media (max-width: $breakpoint-tablet) {
-      text-align: right;
+      width: calc(100% - 80px);
+      margin-left: 80px;
+      text-align: left;
     }
   }
-  
+
   .line {
-    width: 181px;
-    height: 2px;
-    background: var(--accent);
-    margin: 0 0 0 $spacing-md;
-    
+    left: calc(50% + 10px);
+    width: 60px;
+
     @media (max-width: $breakpoint-tablet) {
       display: none;
     }
@@ -104,52 +99,78 @@
 
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  background: var(--background);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
 }
 
 .textBlock {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; // Tighter spacing for fluent text
+  gap: 1rem;
+}
+
+.date {
+  font-family: "Linden Hill", serif;
+  font-size: 1rem;
+  color: var(--accent-secondary, #8b7355);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: 0.3px;
+  font-style: italic;
 }
 
 .year {
-  font-family: 'Linden Hill', serif;
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  font-weight: 400;
+  font-family: "Linden Hill", serif;
+  font-size: 1.2rem;
+  color: var(--accent);
+  font-weight: 600;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.3;
+  letter-spacing: 0.5px;
 }
 
 .text {
-  font-family: 'Linden Hill', serif;
-  font-size: 1.5rem;
+  font-family: "Linden Hill", serif;
+  font-size: 1.1rem;
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.6;
   font-weight: 400;
   margin: 0;
+  padding: 0;
 }
 
 .readMore {
-  font-family: 'Linden Hill', serif;
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  text-decoration: underline;
+  font-family: "Linden Hill", serif;
+  font-size: 1rem;
+  color: var(--accent);
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  transition: opacity $transition-fast;
+  transition: all $transition-fast;
   width: fit-content;
-  margin-top: 0.25rem;
-  
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid transparent;
+
   &:hover {
-    opacity: 0.8;
+    border-bottom-color: var(--accent);
+    transform: translateY(-1px);
   }
-  
+
   svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
+    transition: transform $transition-fast;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
   }
 }

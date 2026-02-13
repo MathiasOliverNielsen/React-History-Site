@@ -32,4 +32,5 @@ export interface TimelineEvent {
   text: string;
   wikipediaUrl?: string;
   type: "event" | "birth" | "death";
+  eventDate?: Date; // Added to track which day the event is from
 }
