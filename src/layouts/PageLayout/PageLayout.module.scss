@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .layout {
   min-height: 100vh;
@@ -12,8 +12,10 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 $container-padding;
-  
+  margin-top: 2rem;
+
   @media (max-width: $breakpoint-tablet) {
     padding: 0 $spacing-md;
+    margin-top: 1rem;
   }
 }

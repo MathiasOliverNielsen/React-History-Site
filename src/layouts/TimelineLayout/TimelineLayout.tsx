@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import styles from './TimelineLayout.module.scss';
+import { type ReactNode } from "react";
+import styles from "./TimelineLayout.module.scss";
 
 interface TimelineLayoutProps {
   children: ReactNode;
@@ -10,9 +10,7 @@ export function TimelineLayout({ children }: TimelineLayoutProps) {
     <div className={styles.timeline}>
       <div className={styles.spine} />
       <div className={styles.spineTop} />
-      <div className={styles.items}>
-        {children}
-      </div>
+      <div className={styles.items}>{children}</div>
       <div className={styles.footer}>
         <p className={styles.scrollText}>Scroll down for more</p>
         <svg className={styles.arrow} height="63" viewBox="0 0 2 63" fill="none">

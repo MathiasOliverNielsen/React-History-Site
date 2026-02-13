@@ -1,11 +1,17 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .timeline {
   position: relative;
   padding: 4rem 0;
-  
+
   @media (max-width: $breakpoint-tablet) {
     padding: 2rem 0;
+    padding-left: 1rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1.5rem 0;
+    padding-left: 0.5rem;
   }
 }
 
@@ -18,10 +24,15 @@
   background: var(--accent);
   transform: translateX(-50%);
   z-index: 0;
-  
+
   @media (max-width: $breakpoint-tablet) {
-    left: 20px;
+    left: 30px;
     transform: none;
+    background: linear-gradient(to bottom, var(--accent) 0%, rgba(var(--accent-rgb), 0.6) 100%);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    left: 25px;
   }
 }
 
@@ -35,21 +46,28 @@
   border-radius: 50%;
   background: var(--accent);
   z-index: 1;
-  
+
   @media (max-width: $breakpoint-tablet) {
-    left: 20px;
+    left: 30px;
     transform: none;
     width: 50px;
     height: 50px;
     top: -25px;
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.2);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    left: 25px;
+    width: 45px;
+    height: 45px;
   }
 }
 
 .items {
   position: relative;
   z-index: 2;
-  margin-top: 8rem;
-  
+  margin-top: 3rem;
+
   @media (max-width: $breakpoint-tablet) {
     margin-top: 6rem;
   }
@@ -65,7 +83,7 @@
 }
 
 .scrollText {
-  font-family: 'Linden Hill', serif;
+  font-family: "Linden Hill", serif;
   font-size: 1.5rem;
   color: var(--text-primary);
   text-align: center;

@@ -1,12 +1,18 @@
-@import './variables';
-@import './reset';
-@import './typography';
+@import "./variables";
+@import "./reset";
+@import "./typography";
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color $transition-medium, color $transition-medium;
+  transition:
+    background-color $transition-medium,
+    color $transition-medium;
   overflow-x: hidden;
+
+  @media (max-width: $breakpoint-tablet) {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(33, 32, 32, 1) 100%);
+  }
 }
 
 #root {
@@ -18,7 +24,7 @@ body {
   max-width: $max-width;
   margin: 0 auto;
   padding: 0 $container-padding;
-  
+
   @media (max-width: $breakpoint-tablet) {
     padding: 0 $spacing-md;
   }
