@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { Header } from "../../components/Header";
-import { ThemeToggle } from "../../components/ThemeToggle";
-import { BackToTop } from "../../components/BackToTop";
+import { Header } from "../../components/Header/Header";
+import { ThemeToggle } from "../../components/ThemeToggle/ThemeToggle";
+import { BackToTop } from "../../components/BackToTop/BackToTop";
 import styles from "./PageLayout.module.scss";
 
 interface PageLayoutProps {

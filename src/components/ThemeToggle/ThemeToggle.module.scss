@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@use "../../styles/variables" as *;
 
 .toggle {
   position: fixed;
@@ -10,22 +10,24 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: transform $transition-fast, opacity $transition-fast;
-  
+  transition:
+    transform $transition-fast,
+    opacity $transition-fast;
+
   &:hover {
     transform: scale(1.1);
   }
-  
+
   &:active {
     transform: scale(0.95);
   }
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-  
+
   @media (max-width: $breakpoint-tablet) {
     width: 42px;
     height: 42px;

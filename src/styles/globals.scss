@@ -1,6 +1,6 @@
-@import "./variables";
-@import "./reset";
-@import "./typography";
+@use "./variables" as *;
+@use "./reset" as *;
+@use "./typography" as *;
 
 body {
   background-color: var(--bg-primary);

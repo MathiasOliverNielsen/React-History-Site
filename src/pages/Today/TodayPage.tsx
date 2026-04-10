@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { PageLayout } from "../../layouts/PageLayout";
-import { TimelineLayout } from "../../layouts/TimelineLayout";
-import { TimelineItem } from "../../components/TimelineItem";
+import { PageLayout } from "../../layouts/PageLayout/PageLayout";
+import { TimelineLayout } from "../../layouts/TimelineLayout/TimelineLayout";
+import { TimelineItem } from "../../components/TimelineItem/TimelineItem";
 import { fetchAllHistoryForDate } from "../../api/history";
 import type { TimelineEvent } from "../../api/types";
 import { getTimelineSides } from "../../api/timeline-utils";
